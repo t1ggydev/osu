@@ -31,6 +31,11 @@ namespace osu.Game.Rulesets.Osu.Skinning.Legacy
 
         private const float spm_hide_offset = 50f;
 
+        // osu!stable nails the RPM value's right edge at a fixed x, which leaves the whole "RPM:" + value
+        // block offset to the right of screen-centre. Shift both pieces left by this to visually centre it.
+        // The exact amount depends on the skin's spinner-rpm texture padding.
+        private const float spm_centre_offset = 44f;
+
         protected DrawableSpinner DrawableSpinner { get; private set; } = null!;
 
         public Drawable? ApproachCircle { get; protected set; }
@@ -76,14 +81,14 @@ namespace osu.Game.Rulesets.Osu.Skinning.Legacy
                         Origin = Anchor.TopLeft,
                         Texture = source.GetTexture("spinner-rpm"),
                         Scale = new Vector2(SPRITE_SCALE),
-                        Position = new Vector2(-87, 445 + spm_hide_offset),
+                        Position = new Vector2(-87 - spm_centre_offset, 445 + spm_hide_offset),
                     },
                     spmCounter = new LegacySpriteText(LegacyFont.Score)
                     {
                         Anchor = Anchor.TopCentre,
                         Origin = Anchor.TopRight,
                         Scale = new Vector2(SPRITE_SCALE * 0.9f),
-                        Position = new Vector2(80, 448 + spm_hide_offset),
+                        Position = new Vector2(80 - spm_centre_offset, 448 + spm_hide_offset),
                     },
                     spin = new Sprite
                     {
